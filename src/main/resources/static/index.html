@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+</head>
+<body>
+    <h1>Search for your favourite book!</h1>
+    <form method="GET" action="/search">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" >
+        <br>
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author" >
+        <br>
+        <label for="sort">Sort by:</label>
+        <select name="sort" required select="author">
+            <option value="author">author</option>
+            <option value="title">title</option>
+        </select>
+        <br>
+        <label for="result">Results per page:</label>
+        <select name="result" required select="1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{"id":"1",
+"title":"ella the rose fairy",
+"author":"Daisy Meadows",
+"thumbnail":"/image/ella_the_rose_fairy.jpg"}
+
+{"id":"2",
+"title":"Harry Potter P Stone",
+"author":"J.K. Rowling",
+"thumbnail":"/image/harry-potter-p-stone.jpg"}
+
+{"id":"3",
+"title":"The Haunted Tower",
+"author":"J.K. Rowling",
+"thumbnail":"/image/the_haunted_tower.jpg"}
+
+{"id":"4",
+"title":"Random Book",
+"author":"Random Author",
+"thumbnail":"/image/no_book_cover.jpg"}
+
+

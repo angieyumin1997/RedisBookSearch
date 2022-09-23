@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h1>Book Search Results</h1>
+
+    <table>
+        <tr>
+            <td>
+                Book Title
+            </td>
+            <td>
+                Author
+            </td>
+            <td>
+                ThumbNail
+            </td>
+        </tr>
+        <tr data-th-each="b: ${books}">
+            <td data-th-text =${b.title}></td>
+            <td data-th-text =${b.author}></td>
+            <td>
+                <img data-th-src="${b.thumbNail}" alt="" style="width: 100px;">
+            </td>
+        </tr>
+    </table>
+    <div>
+        <form action="/search" method="POST">
+            <input type="text" name="limit" id="limit" data-th-value=${limit} hidden>
+            <input type="text" name="offset" id="offset" data-th-value=${next} hidden>
+            <button th:if="${!nextResults.isEmpty()}" type="submit">Next</button>
+        </form>
+
+        <form action="/search" method="POST">
+            <input type="text" name="limit" id="limit" data-th-value=${limit} hidden>
+            <input type="text" name="offset" id="offset" data-th-value=${prev} hidden>
+            <button th:if="${!prevResults.isEmpty()}" type="submit">Prev</button>
+        </form>
+    </div>
+</body>
+</html>
