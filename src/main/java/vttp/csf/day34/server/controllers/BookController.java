@@ -37,11 +37,20 @@ public class BookController {
         List<Book> searchResult = new ArrayList<>();
         Integer limit = Integer.parseInt(result);
         if (title.isEmpty()) {
+            System.out.println(">>>>>>>>>search by author");
             searchResult = booksRepo.searchByAuthor(author);
+            System.out.println(">>>>>>>>>results"+searchResult);
+
         } else if (author.isEmpty()) {
-            searchResult = booksRepo.searchByTitle(author);
+            System.out.println(">>>>>>>>>search by title");
+            searchResult = booksRepo.searchByTitle(title);
+            System.out.println(">>>>>>>>>results"+searchResult);
+
         } else {
+            System.out.println(">>>>>>>>>search by author and title");
             searchResult = booksRepo.searchByTitleAndAuthor(author,title);
+            System.out.println(">>>>>>>>>results"+searchResult);
+
         }
 
         if (sort.equals("author")){
@@ -89,5 +98,4 @@ public class BookController {
             model.addAttribute("nextResults", nextResults);
             return "results";
     }
-
 }

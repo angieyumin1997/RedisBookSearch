@@ -54,7 +54,8 @@ public class BooksRepo implements RedisRepo {
                         .toLowerCase()
                         .contains(title))
                 .collect(Collectors.toList());
-        
+        System.out.println(">>>>>>>>title"+title);
+        System.out.println(">>>>>>>>booksbytitle"+bookResults);
         return bookResults;
     }
 
@@ -65,6 +66,8 @@ public class BooksRepo implements RedisRepo {
                         .toLowerCase()
                         .contains(author))
                 .collect(Collectors.toList());
+        System.out.println(">>>>>>>>author"+author);
+        System.out.println(">>>>>>>>booksByAuthor"+bookResults);
         return bookResults;
     }
 
@@ -72,7 +75,9 @@ public class BooksRepo implements RedisRepo {
         Set<String> ids = new HashSet<>();
         List<Book> searchResult = new ArrayList<>();
         List<Book> booksByTitle = searchByTitle(title);
+        System.out.println(">>>>>>>>booksbytitle"+booksByTitle);
         List<Book> booksByAuthor = searchByAuthor(author);
+        System.out.println(">>>>>>>>booksByAuthor"+booksByAuthor);
 
         for (Book b : booksByTitle) {
             ids.add(b.getId());
@@ -104,6 +109,5 @@ public class BooksRepo implements RedisRepo {
             e.printStackTrace();
         }
         return b;
-
     }
 }
