@@ -7,12 +7,41 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="/">
+        <button>Back</button>
+    </a>
    <h1>Book Search Results</h1>
-
+   <form action="/search" method="GET">
+        <label for="sort">Sort by:</label>
+            <select name="sort" required select="author">
+                <option value="author">author</option>
+                <option value="title">title</option>
+            </select>
+        <br>
+        <label for="alphabetical">Alphabetical:</label>
+            <select name="alphabetical" required select="true">
+                <option value="true">A - Z</option>
+                <option value="false">Z - A</option>
+            </select>
+        <br>
+        <label for="result">Results per page:</label>
+        <select name="result" required select="1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <input type="text" name="title" id="title" data-th-value=${title} hidden>
+        <input type="text" name="author" id="author" data-th-value=${author} hidden>
+        <br>            
+        <button type="submit">Submit</button>
+    </form>
+    <br>
     <table>
         <tr>
             <td>
-                Book Title
+               Book Title
             </td>
             <td>
                 Author

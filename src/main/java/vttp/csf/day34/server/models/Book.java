@@ -23,7 +23,7 @@ public class Book implements Serializable{
     }
 
     public String getTitle() {
-        return title;
+        return title.toLowerCase();
     }
 
     public void setTitle(String title) {
@@ -31,7 +31,7 @@ public class Book implements Serializable{
     }
 
     public String getAuthor() {
-        return author;
+        return author.toLowerCase();
     }
 
     public void setAuthor(String author) {

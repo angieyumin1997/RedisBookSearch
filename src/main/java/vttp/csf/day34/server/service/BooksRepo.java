@@ -2,6 +2,7 @@ package vttp.csf.day34.server.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -91,20 +92,32 @@ public class BooksRepo implements RedisRepo {
         return searchResult;
     }
 
-    public List<Book> sortByAuthor(List<Book> listOfBooks){
+    public List<Book> sortByAuthorAToZ(List<Book> listOfBooks){
         Collections.sort(listOfBooks, comparing(Book::getAuthor));
         return listOfBooks;
     }
 
-    public List<Book> sortByTitle(List<Book> listOfBooks){
+    public List<Book> sortByAuthorZToA(List<Book> listOfBooks){
+        Collections.sort(listOfBooks, comparing(Book::getAuthor, Comparator.reverseOrder()));
+        return listOfBooks;
+    }
+
+    public List<Book> sortByTitleAToZ(List<Book> listOfBooks){
         Collections.sort(listOfBooks, comparing(Book::getTitle));
+        return listOfBooks;
+    }
+
+    public List<Book> sortByTitleZToA(List<Book> listOfBooks){
+        Collections.sort(listOfBooks, comparing(Book::getTitle, Comparator.reverseOrder()));
         return listOfBooks;
     }
 
     public List<Book> getBooks(Integer offset,Integer limit,List<Book> lisOfBooks){
         List<Book> b = new ArrayList<>();
+        Integer count = lisOfBooks.size();
         try{
-            b = lisOfBooks.subList(offset, limit + offset);
+            Integer l = Math.min(count, limit + offset);
+            b = lisOfBooks.subList(offset, l);
         }catch(Exception e){
             e.printStackTrace();
         }

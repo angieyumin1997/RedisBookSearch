@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +31,9 @@ public class BookController {
     public String search(
             @RequestParam(name = "title") String title,
             @RequestParam(name = "author") String author,
-            @RequestParam(name = "sort") String sort,
-            @RequestParam(name = "result") String result,
+            @RequestParam(name = "sort" , defaultValue = "author") String sort,
+            @RequestParam(name = "result", defaultValue = "5") String result,
+            @RequestParam(name = "alphabetical", defaultValue = "true") String alphabetical,
             Model model) {
 
         List<Book> searchResult = new ArrayList<>();
@@ -54,18 +56,29 @@ public class BookController {
         }
 
         if (sort.equals("author")){
-            try{
-            this.searchResults = booksRepo.sortByAuthor(searchResult);
-            searchResult = this.searchResults.subList(0, limit + 0);
-            }catch(Exception e){
-                e.printStackTrace();
+            if(alphabetical.equals("true")){
+                this.searchResults = booksRepo.sortByAuthorAToZ(searchResult);
+                Integer l = Math.min(this.searchResults.size(),limit);
+                searchResult = this.searchResults.subList(0, l);
+                System.out.println(">>>>>sort by author, from a-z");
+            }else{
+                this.searchResults = booksRepo.sortByAuthorZToA(searchResult);
+                Integer l = Math.min(this.searchResults.size(),limit);
+                searchResult = this.searchResults.subList(0, l);
+                System.out.println(">>>>>sort by author, from z-a");
             }
-        }else{
-            try{
-                this.searchResults = booksRepo.sortByTitle(searchResult);
-                searchResult = this.searchResults.subList(0, limit + 0);
-            }catch(Exception e){
-                e.printStackTrace();
+            
+        }else if(sort.equals("title")){
+            if(alphabetical.equals("true")){
+                this.searchResults = booksRepo.sortByTitleAToZ(searchResult);
+                Integer l = Math.min(this.searchResults.size(),limit);
+                searchResult = this.searchResults.subList(0, l);
+                System.out.println(">>>>>sort by title, from a-z");
+            } else{
+                this.searchResults = booksRepo.sortByTitleZToA(searchResult);
+                Integer l = Math.min(this.searchResults.size(),limit);
+                searchResult = this.searchResults.subList(0, l);
+                System.out.println(">>>>>sort by title, from z-a");
             }
         }
 
@@ -78,6 +91,8 @@ public class BookController {
         model.addAttribute("limit", limit);
         model.addAttribute("prevResults", prevResults);
         model.addAttribute("nextResults", nextResults);
+        model.addAttribute("title", title);
+        model.addAttribute("author", author);
         return "results";
     }
 
